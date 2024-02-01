@@ -13,22 +13,6 @@ int max(int a, int b)
 }
 
 /**
- * binary_tree_is_leaf - function checks if node is  leaf or not
- * @node: node to be checked
- * Return: 1 if node if leaf, 0 if not
-*/
-
-int binary_tree_is_leaf(const binary_tree_t *node)
-{
-	if (node == NULL)
-		return (0);
-	else if (node->left == NULL && node->right == NULL)
-		return (1);
-	return (0);
-}
-
-
-/**
  * binary_tree_height - function computes maximum height of node from root
  * @tree: pointer to the root node of the tree
  * Return: 0 if tree is null
@@ -36,14 +20,11 @@ int binary_tree_is_leaf(const binary_tree_t *node)
 
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	int right_height;
-	int left_height;
+	size_t right_height, left_height;
 
-	if (tree == NULL || binary_tree_is_leaf(tree))
+	if (tree == NULL)
 		return (0);
-	right_height = binary_tree_height(tree->right);
-	left_height = binary_tree_height(tree->left);
-	if (binary_tree_is_leaf(tree))
-		return (max(left_height, right_height));
-	return (1 + right_height);
+	right_height = tree->right ? 1 + binary_tree_height(tree->right) : 0;
+	left_height = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+	return (max(left_height, right_height));
 }
