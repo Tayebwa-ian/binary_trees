@@ -8,8 +8,8 @@ queue_t *createQueue()
 {
 	queue_t *queue = malloc(sizeof(queue_t));
 
-	if (!queue)
-		return NULL;
+	if (queue == NULL)
+		return (NULL);
 	queue->front = NULL;
 	queue->end = NULL;
 	return (queue);
@@ -72,10 +72,11 @@ binary_tree_t *pop(queue_t *queue)
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	binary_tree_t *current;
+	queue_t *queue;
 
 	if (tree && func)
 	{
-		queue_t *queue = createQueue();
+		queue = createQueue();
 		push(queue, tree);
 
 		while (queue->front)

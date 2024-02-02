@@ -27,12 +27,22 @@ typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
+/**
+ *struct queuenode_s - queue node struct
+ *@value: tree value
+ *@next: next node in queue
+ */
 struct queuenode_s
 {
 	binary_tree_t *value;
 	struct queuenode_s *next;
 };
 
+/**
+ *struct queue_s - queue struct
+ *@front: the front to pop elements
+ *@end: the rear to enter elements
+ */
 struct queue_s
 {
 	struct queuenode_s *front;
