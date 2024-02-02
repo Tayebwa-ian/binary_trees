@@ -27,17 +27,20 @@ typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
-typedef struct queuenode_s
+struct queuenode_s
 {
 	binary_tree_t *value;
-	qnode_t *next;
-} qnode_t;
+	struct queuenode_s *next;
+};
 
-typedef struct queue_s
+struct queue_s
 {
-	qnode_t *front;
-	qnode_t *end;
-} queue_t;
+	struct queuenode_s *front;
+	struct queuenode_s *end;
+};
+
+typedef struct queuenode_s qnode_t;
+typedef struct queue_s queue_t;
 
 /* +++++++++++++ Function prototypes +++++++++++++++++*/
 

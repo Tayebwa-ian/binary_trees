@@ -6,7 +6,7 @@
  */
 queue_t *createQueue()
 {
-	queue_t queue = malloc(sizeof(queue_t));
+	queue_t *queue = malloc(sizeof(queue_t));
 
 	if (!queue)
 		return NULL;
@@ -21,22 +21,22 @@ queue_t *createQueue()
  *@data: data to insert in the queue
  *Return: void
  */
-void push(queue_t *queue, binary_tree_t *data)
+void push(queue_t *queue, const binary_tree_t *data)
 {
 	qnode_t *node = malloc(sizeof(qnode_t));
 
 	if (queue && data)
 	{
-		node->value = data;
-		node->next = NULL
-		if (!queue->front)
+		node->value = (binary_tree_t *)data;
+		node->next = NULL;
+		if (queue->front == NULL)
 		{
 			queue->front = node;
 			queue->end = node;
 			return;
 		}
-		queue->end->next = value;
-		queue->end = value;
+		queue->end->next = node;
+		queue->end = node;
 	}
 }
 
@@ -54,7 +54,7 @@ binary_tree_t *pop(queue_t *queue)
 	{
 		temp_data = queue->front->value;
 		temp_node = queue->front;
-		if (!queue->front->next)
+		if (queue->front->next == NULL)
 			queue->end = NULL;
 		queue->front = queue->front->next;
 		free(temp_node);
@@ -71,8 +71,22 @@ binary_tree_t *pop(queue_t *queue)
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
+	binary_tree_t *current;
+
 	if (tree && func)
 	{
-		
+		queue_t *queue = createQueue();
+		push(queue, tree);
+
+		while (queue->front)
+		{
+			current = pop(queue);
+			func(current->n);
+			if (current->left)
+				push(queue, current->left);
+			if (current->right)
+				push(queue, current->right);
+		}
+		free(queue);
 	}
 }
