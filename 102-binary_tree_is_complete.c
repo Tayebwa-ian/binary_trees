@@ -2,7 +2,7 @@
 
 /**
  *binary_tree_is_complete - check if binary tree is complete
- *@root: pointer to the root node of the tree to check
+ *@tree: pointer to the root node of the tree to check
  *Return: 1 if tree is complete or 0 otherwise
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
